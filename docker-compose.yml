@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: django_posts_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: django
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: django
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: django_posts_web
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app              
+    environment:
+      - DATABASE_URL=postgres://django:django@db:5432/django
+      - DJANGO_DEBUG=True
+      - DJANGO_SECRET_KEY=change-me
+
+volumes:
+  pgdata:

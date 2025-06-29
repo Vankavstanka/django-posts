@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.py[cod]
+
+# виртуальные окружения / редактор
+.venv/
+.vscode/
+.idea/
+
+# базы и локальные данные
+db.sqlite3
+pgdata/
+*.sqlite3
+
+# env-файлы с секретами
+.env
+.env.*
